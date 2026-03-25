@@ -1,0 +1,43 @@
+{
+  "name": "payslip-mailer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node node_modules/@tauri-apps/cli/tauri.js dev --port 3000",
+    "build:web": "vite build",
+    "build": "node node_modules/@tauri-apps/cli/tauri.js build",
+    "bench:llm": "node scripts/bench-llm-speed.mjs",
+    "check:macos:signing": "./scripts/check-macos-signing.sh",
+    "build:macos:app": "./scripts/build-macos.sh arm64 app",
+    "build:macos:dmg": "./scripts/build-macos.sh arm64 dmg",
+    "build:macos:app:arm64": "./scripts/build-macos.sh arm64 app",
+    "build:macos:dmg:arm64": "./scripts/build-macos.sh arm64 dmg",
+    "build:macos:app:x64": "./scripts/build-macos.sh x64 app",
+    "build:macos:dmg:x64": "./scripts/build-macos.sh x64 dmg",
+    "build:windows:msi": "./scripts/build-windows.sh x64 msi",
+    "build:release": "./scripts/build-release.sh all",
+    "notarize:macos:dmg": "./scripts/notarize-dmg.sh",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.5.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@tauri-apps/api": "^2.5.6",
+    "@tauri-apps/cli": "^2.5.6",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^29.0.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.0.0",
+    "vitest": "^4.1.1"
+  }
+}
