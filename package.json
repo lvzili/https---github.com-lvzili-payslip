@@ -17,7 +17,10 @@
     "build:windows:msi": "./scripts/build-windows.sh x64 msi",
     "build:release": "./scripts/build-release.sh all",
     "notarize:macos:dmg": "./scripts/notarize-dmg.sh",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.5.6",

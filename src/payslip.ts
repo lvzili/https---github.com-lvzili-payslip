@@ -414,3 +414,35 @@ export function exportFailedRows(preview: PreviewResponse, failedRows: Array<{
   link.click();
   URL.revokeObjectURL(url);
 }
+
+export function validateSmtpSettings(smtp: SmtpSettings): Partial<Record<"host" | "port" | "username" | "password" | "fromAddress", string>> {
+  const errors: Partial<Record<"host" | "port" | "username" | "password" | "fromAddress", string>> = {};
+
+  if (!smtp.host.trim()) {
+    errors.host = "请输入 SMTP 主机";
+  }
+
+  const port = smtp.port.trim();
+  if (!port) {
+    errors.port = "请输入端口";
+  } else {
+    const portNumber = Number(port);
+    if (!Number.isInteger(portNumber) || portNumber <= 0 || portNumber > 65535) {
+      errors.port = "端口必须是 1 到 65535 的整数";
+    }
+  }
+
+  if (!smtp.fromAddress.trim()) {
+    errors.fromAddress = "请输入发件邮箱";
+  }
+
+  if (smtp.auth && !smtp.username.trim()) {
+    errors.username = "启用 SMTP 认证时必须填写用户名";
+  }
+
+  if (smtp.auth && !smtp.password.trim()) {
+    errors.password = "启用 SMTP 认证时必须填写密码或授权码";
+  }
+
+  return errors;
+}

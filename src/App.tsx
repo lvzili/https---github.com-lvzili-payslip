@@ -12,6 +12,7 @@ import {
   type SendRequest,
   type SendResponse,
   type SmtpSettings,
+  validateSmtpSettings,
 } from "./payslip";
 import {
   isTauriRuntime,
@@ -31,10 +32,6 @@ const SEND_STATUS_TEXT = {
   FAILED: "发送失败",
 } as const;
 
-type SmtpValidationErrors = Partial<
-  Record<"host" | "port" | "username" | "password" | "fromAddress", string>
->;
-
 type SendProgressEvent = {
   processedCount: number;
   totalCount: number;
@@ -43,38 +40,6 @@ type SendProgressEvent = {
   email: string;
   status: "SUCCESS" | "FAILED";
 };
-
-function validateSmtpSettings(smtp: SmtpSettings): SmtpValidationErrors {
-  const errors: SmtpValidationErrors = {};
-
-  if (!smtp.host.trim()) {
-    errors.host = "请输入 SMTP 主机";
-  }
-
-  const port = smtp.port.trim();
-  if (!port) {
-    errors.port = "请输入端口";
-  } else {
-    const portNumber = Number(port);
-    if (!Number.isInteger(portNumber) || portNumber <= 0 || portNumber > 65535) {
-      errors.port = "端口必须是 1 到 65535 的整数";
-    }
-  }
-
-  if (!smtp.fromAddress.trim()) {
-    errors.fromAddress = "请输入发件邮箱";
-  }
-
-  if (smtp.auth && !smtp.username.trim()) {
-    errors.username = "启用 SMTP 认证时必须填写用户名";
-  }
-
-  if (smtp.auth && !smtp.password.trim()) {
-    errors.password = "启用 SMTP 认证时必须填写密码或授权码";
-  }
-
-  return errors;
-}
 
 function waitForNextPaint() {
   return new Promise<void>((resolve) => {
@@ -287,7 +252,7 @@ function App() {
         if (!row.recipientName || !row.email) {
           return {
             ...row,
-            status: "INVALID",
+            status: "INVALID" as const,
             message: "缺少姓名或邮箱"
           };
         }
@@ -296,7 +261,7 @@ function App() {
         if (!employeeDataSaved || employeeData.length === 0) {
           return {
             ...row,
-            status: "INVALID",
+            status: "INVALID" as const,
             message: "未导入员工信息"
           };
         }
@@ -315,7 +280,7 @@ function App() {
         if (!isMatched) {
           return {
             ...row,
-            status: "INVALID",
+            status: "INVALID" as const,
             message: "姓名或邮箱不匹配"
           };
         }
