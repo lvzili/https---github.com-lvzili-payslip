@@ -158,11 +158,15 @@ export function buildDefaultBodyTemplate() {
 ${rows}
 </table>
 
-<p style="margin: 0 0 12px;">如您对本人工资条信息有疑问，请在收到邮件后及时与财务或人力资源相关同事联系核实。</p>
-<p style="margin: 0 0 12px;">感谢您的配合。</p>
-<p style="margin: 0 0 12px;">此致<br/>敬礼</p>
-<p style="margin: 0 0 12px;">财务部 / 人力资源部<br/>工资条通知系统</p>
-<p style="margin: 0; color: #6b7280; font-size: 12px;">本邮件包含个人薪酬敏感信息，仅限收件人本人查阅，请勿擅自转发、传播或用于其他用途。</p>
+<p style="margin: 0 0 12px;">温馨提示：</p>
+<p style="margin: 0 0 12px;">1.为确保个人隐私，请各位妥善保管，切勿泄露给他人。</p>
+<p style="margin: 0 0 12px;">2.请大家仔细核对薪资构成及各项扣款明细。</p>
+<p style="margin: 0 0 12px;">3.核对时间： 请在收到此邮件2个工作日内完成核对。</p>
+<p style="margin: 0 0 12px;">4.如对薪资有疑问，请在核对完成时间前联系人事行政部或财务部相关同事进行核实，超过核对日期，视为员工认同以上工资明细情况，感谢配合，谢谢！</p>
+<p style="margin: 0 0 12px;">此致</p>
+<p style="margin: 0 0 12px;">敬礼</p>
+<p style="margin: 0 0 12px;">财务部 / 人力资源部</p>
+<p style="margin: 0;">工资条通知系统</p>
 `.trim();
 }
 
